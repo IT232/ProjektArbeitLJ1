@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+\usepackage[english,ngerman]{babel}
+\usepackage[a4paper, lmargin=25mm, rmargin=20mm, tmargin=25mm, bmargin=20mm]{geometry}
+\usepackage{graphicx} % für Bilder
+\usepackage[skip=12pt, indent=0pt]{parskip}
+\usepackage[onehalfspacing]{setspace}
+\usepackage {zref-totpages}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{tocloft}
+\usepackage{moresize}
+\usepackage {fontspec}
+\setmainfont {Arial}
+
+
+\begin{document}
+
+
+\include{variablen}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\fancyhead[L]{\footnotesize \thetitle}
+\fancyhead[R]{\footnotesize \authheader}
+\fancyfoot[C]{\footnotesize \thepage\ von \ztotpages\ }
+}
+\pagestyle{plain}
+
+\include{titelseite}
+\include{abkuerzungen}
+\include{vorwort}
+
+\renewcommand\cftsecdotsep{\cftdotsep}
+\tableofcontents
+
+\include{ch-01}
+
+\include{anlagen}
+\include{selbststaendigkeitserklaerung}
+
+
+\end{document}
