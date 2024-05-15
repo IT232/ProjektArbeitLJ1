@@ -3,29 +3,78 @@
     <meta charset="UTF-8">
     <title>Inventar</title>
     <style>
+        .website{
+            background-color: #273443;
+            height: max-content;
+            position: relative;
+            width: 90%;
+            margin-right: 5%;
+            margin-left: 5%;
+            padding-top: 0.6em;
+            padding-bottom: 0.6em;
+        }
+        body{
+            background-color: #6B7280;
+            color: #ffffff;
+        }
+        caption{
+            color: black;
+            font-size: 26px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 95%;
+            margin: auto;
+            top: 4em;
+        }
+        th{
+            border: 1px solid black;
+            background-color: #1EBEA5;
+            padding: 10px;
+            font-size: 20px;
+        }
+        tr:nth-child(2n){
+            background-color: #6B7280;
+        }
+        tr:hover{
+            background-color: #1d4e89;
+        }
+        td{
+            border: 1px solid black;
+            padding: 5px;
+            font-size: 15px;
+        }
+        .new_record{
+            position: absolute;
+            right: 3%;
+            top: 0.8em;
+        }
     </style>
 </head>
 
 
 <body>
-
-<div>
+<div class="website">
     <form action="new_data.py" method="post">
-        <button type="submit" value="new_data">Neuen Datensatz anlegen</button>
+        <button type="submit" value="new_data" class="new_record">Neuen Datensatz anlegen</button>
     </form>
 
     <form>
         <div>
             <table>
-                <thead>
-                    <th>Bezeichnung</th>
-                    <th>Typ</th>
-                    <th>Hersteller</th>
-                    <th>Anschaffungsdatum</th>
-                    <th>Anschffungspreis</th>
-                    <th>Abteilung</th>
-                    <th>Standort</th>
-                </thead>
+                <caption>Tabelle</caption>
+                <tr>
+                    <thead>
+                        <th>Bezeichnung</th>
+                        <th>Typ</th>
+                        <th>Hersteller</th>
+                        <th>Anschaffungsdatum</th>
+                        <th>Anschffungspreis</th>
+                        <th>Abteilung</th>
+                        <th>Standort</th>
+                        <th></th>
+                    </thead>
+                </tr>
                 <tbody>
                     {$tabellendaten}
                 </tbody>
