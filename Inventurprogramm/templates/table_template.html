@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inventar</title>
+    <style>
+    </style>
+</head>
+
+
+<body>
+
+<div>
+    <form action="new_data.py" method="post">
+        <button type="submit" value="new_data">Neuen Datensatz anlegen</button>
+    </form>
+
+    <form>
+        <div>
+            <table>
+                <thead>
+                    <th>Bezeichnung</th>
+                    <th>Typ</th>
+                    <th>Hersteller</th>
+                    <th>Anschaffungsdatum</th>
+                    <th>Anschffungspreis</th>
+                    <th>Abteilung</th>
+                    <th>Standort</th>
+                </thead>
+                <tbody>
+                    {$tabellendaten}
+                </tbody>
+            </table> 
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
