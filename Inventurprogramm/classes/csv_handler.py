@@ -1,6 +1,6 @@
 import csv
 import os
-from .Validation import Validation
+from .validation import Validation
 
 class CSVHandler:
 
