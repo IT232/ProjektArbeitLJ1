@@ -17,7 +17,7 @@ class TableContent:
             tablecontent += '<tr>'
             for atribute in record:
                 tablecontent += '<td>' + atribute + '</td>'
-            tablecontent += '<td><a href=\'/delete_record\'>löschen</a></td><tr>'    
+            tablecontent += '<td><a href=\'/delete_record/' + record[0] + '\'>löschen</a></td><tr>'    
 
         return tablecontent
 

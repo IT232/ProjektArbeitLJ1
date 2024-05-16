@@ -4,14 +4,14 @@ from .validation import Validation
 
 class CSVHandler:
 
-    FILENAME = 'Inventurprogramm/data/database.csv'
+    FILENAME = 'data/database.csv'
     TEMPFILENAME = 'temp.csv'
 
 
     @staticmethod
     def add_record(parameters):
         if len(parameters) != 7: 
-            raise ValueError("Expected 7 parameters")
+            raise ValueError('Expected 7 parameters')
 
         for i in range(len(parameters)):
             if isinstance(parameters[i], str):
@@ -20,19 +20,19 @@ class CSVHandler:
         bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort = parameters 
 
         validation_results = {
-            "bezeichnung": Validation.text_validation(bezeichnung),
-            "bezeichnung_unique": CSVHandler.find_record(bezeichnung),
-            "typ": Validation.text_validation(typ),
-            "hersteller": Validation.text_validation(hersteller),
-            "anschaffungsdatum": Validation.date_validation(anschaffungsdatum),
-            "anschaffungspreis": Validation.price_validation(anschaffungspreis),
-            "abteilung": Validation.text_validation(abteilung),
-            "standort": Validation.room_validation(standort)
+            'bezeichnung': Validation.text_validation(bezeichnung),
+            'bezeichnung_unique': CSVHandler.find_record(bezeichnung),
+            'typ': Validation.text_validation(typ),
+            'hersteller': Validation.text_validation(hersteller),
+            'anschaffungsdatum': Validation.date_validation(anschaffungsdatum),
+            'anschaffungspreis': Validation.price_validation(anschaffungspreis),
+            'abteilung': Validation.text_validation(abteilung),
+            'standort': Validation.room_validation(standort)
         }
 
 # Einkommentieren zum Debuggen 
         for key, value in validation_results.items():
-            print(f"Validation result for {key}: {value}")
+            print(f'Validation result for {key}: {value}')
 
         if all(validation_results.values()):
             with open(CSVHandler.FILENAME, 'a', newline='') as csvfile:

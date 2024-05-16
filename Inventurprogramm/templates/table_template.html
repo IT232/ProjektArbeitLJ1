@@ -33,7 +33,7 @@
             padding: 10px;
             font-size: 20px;
         }
-        tr:nth-child(2n){
+        tr:nth-child(even){
             background-color: #6B7280;
         }
         tr:hover{
@@ -55,32 +55,28 @@
 
 <body>
 <div class="website">
-    <form action="new_data.py" method="post">
-        <button type="submit" value="new_data" class="new_record">Neuen Datensatz anlegen</button>
+    <form action="/new_record?" method="get">
+        <button type="submit" value="new_record" class="new_record">Neuen Datensatz anlegen</button>
     </form>
 
-    <form>
-        <div>
-            <table>
+    <div>
+        <table>
+            <thead>
                 <caption>Tabelle</caption>
-                <tr>
-                    <thead>
-                        <th>Bezeichnung</th>
-                        <th>Typ</th>
-                        <th>Hersteller</th>
-                        <th>Anschaffungsdatum</th>
-                        <th>Anschffungspreis</th>
-                        <th>Abteilung</th>
-                        <th>Standort</th>
-                        <th></th>
-                    </thead>
-                </tr>
-                <tbody>
-                    {$tabledata}
-                </tbody>
-            </table> 
-        </div>
-    </form>
+            </thead>
+            <tr>
+                <th>Bezeichnung</th>
+                <th>Typ</th>
+                <th>Hersteller</th>
+                <th>Anschaffungsdatum</th>
+                <th>Anschffungspreis</th>
+                <th>Abteilung</th>
+                <th>Standort</th>
+                <th></th>
+            </tr>
+                {$tabledata}
+        </table> 
+    </div>
 </div>
 
 </body>
