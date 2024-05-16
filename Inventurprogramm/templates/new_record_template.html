@@ -28,7 +28,7 @@
 <body>
 <div class="website">
     <form id=data action="/save_new_record" method="post">
-        <p><label>Bezeichnung: </label>
+        <p><label>Bezeichnung (Muss einzigartig sein): </label>
             <input required="required" id="bezeichnung" name="bezeichnung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
         <p><label>Typ: </label>
             <input required="required" id="typ" name="typ" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
@@ -43,6 +43,10 @@
         <p><label>Standort: </label>
             <input required="required" id="standort" name="standort" pattern="\d+$"></p>
         <button type="submit">Speichern</button>
+    </form>
+    <br>
+    <form action="/" method="get">
+        <button type="back">Zurück</button>
     </form>
 </div>
 

@@ -20,8 +20,11 @@ class Validation:
 
     @staticmethod
     def price_validation(to_validate_price)->bool:
-        price_characters=re.compile('^\d+(\.\d{0,1,2})$', re.IGNORECASE)
+        price_characters = re.compile('^\d+(\.\d{2})$', re.IGNORECASE)
+        price_characters_without_point = re.compile('^\d+$', re.IGNORECASE)
         if price_characters.match(str(to_validate_price)):
+            return True
+        elif price_characters_without_point.match(str(to_validate_price)):
             return True
         else:
             return False  

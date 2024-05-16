@@ -1,5 +1,4 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time
 from classes.table_content import TableContent
 from classes.csv_handler import CSVHandler
 
@@ -8,14 +7,13 @@ serverPort = 10021
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
+        if self.path == '/' or self.path == '/index.html' or self.path == '/?':
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             with open('templates/table_template.html', 'r') as file:
                 content = file.read()
                 content = content.replace('{$tabledata}', TableContent.get_tablecontent())
-                print(content)
                 self.wfile.write(bytes(content, 'utf-8'))
             
 
@@ -28,7 +26,7 @@ class MyServer(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(content, 'utf-8'))
 
 
-        elif self.path == '/delete_record/':
+        elif '/delete_record/' in self.path:
             key = str(self.path.split('/')[-1])
             CSVHandler.delete_record(key)
             self.send_response(302)
@@ -46,7 +44,6 @@ class MyServer(BaseHTTPRequestHandler):
         if self.path == '/save_new_record':
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length).decode('utf-8')
-            print("record_data:", content_length)
             record_data = dict(item.split('=') for item in post_data.split('&'))
             CSVHandler.add_record([record_data['bezeichnung'], record_data['typ'], record_data['hersteller'], record_data['anschaffungsdatum'], record_data['anschaffungspreis'], record_data['abteilung'], record_data['standort']])
             self.send_response(302)
@@ -59,11 +56,10 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(b'<html><body><h1>404 Not Found</h1><p>Die Seite, die sie aufrufen wollten existiert nicht.</p></body></html>')   
 
 
-if __name__ == '__main__':       
-    print('WTF')
+if __name__ == '__main__':
     webServer = HTTPServer((hostName, serverPort), MyServer)
-    print('TEst')
-    print('Server started http://%s:%s' % (hostName, serverPort))
+    print("Unsere GUI ist eine Website!")
+    print('Server gestartet http://%s:%s' % (hostName, serverPort))
 
     try:
         webServer.serve_forever()
