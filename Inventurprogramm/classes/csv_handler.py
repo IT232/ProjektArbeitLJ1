@@ -39,7 +39,7 @@ class CSVHandler:
                 record_writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 record_writer.writerow(parameters)
         else:
-            return False     
+            return True
 
 
 

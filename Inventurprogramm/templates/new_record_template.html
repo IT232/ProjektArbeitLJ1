@@ -27,21 +27,21 @@
 
 <body>
 <div class="website">
-    <form action="/save_new_record" method="post">
+    <form id=data action="/save_new_record" method="post">
         <p><label>Bezeichnung: </label>
-            <input required="required" id="bezeichnung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+            <input required="required" id="bezeichnung" name="bezeichnung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
         <p><label>Typ: </label>
-            <input required="required" id="typ" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+            <input required="required" id="typ" name="typ" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
         <p><label>Hersteller: </label>
-            <input required="required" id="hersteller" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+            <input required="required" id="hersteller" name="hersteller" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
         <p><label>Anschaffungsdatum: </label>
-            <input required="required" id="anschaffungsdatum" placeholder="tt.mm.jjjj" pattern="^\d{2}\.\d{2}\.\d{4}$"></p>            
+            <input type=date required="required" id="anschaffungsdatum" name="anschaffungsdatum" placeholder="tt.mm.jjjj" pattern="^\d{2}\.\d{2}\.\d{4}$"></p>
         <p><label>Anschaffungspreis: </label>
-            <input required="required" id="anschaffungspreis" placeholder="0.00" pattern="^\d+(\.\d{1,2})$">€</p>
+            <input required="required" id="anschaffungspreis" name="anschaffungspreis" placeholder="0.00" pattern="^\d+(\.\d{0,1,2})$">€</p>
         <p><label>Abteilung: </label>
-            <input required="required" id="abteilung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+            <input required="required" id="abteilung" name="abteilung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
         <p><label>Standort: </label>
-            <input required="required" id="standort" pattern="^d+$"></p>    
+            <input required="required" id="standort" name="standort" pattern="\d+$"></p>
         <button type="submit">Speichern</button>
     </form>
 </div>

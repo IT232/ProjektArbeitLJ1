@@ -29,7 +29,7 @@ class MyServer(BaseHTTPRequestHandler):
 
 
         elif self.path == '/delete_record/':
-            key = int(self.path.split('/')[-1])
+            key = str(self.path.split('/')[-1])
             CSVHandler.delete_record(key)
             self.send_response(302)
             self.send_header('Location', '/')
@@ -46,8 +46,9 @@ class MyServer(BaseHTTPRequestHandler):
         if self.path == '/save_new_record':
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length).decode('utf-8')
+            print("record_data:", content_length)
             record_data = dict(item.split('=') for item in post_data.split('&'))
-            CSVHandler.save_new_record([record_data['bezeichnung'], record_data['typ'], record_data['hersteller'], record_data['anschaffungsdatum'], record_data['anschaffungspreis'], record_data['abteilung'], record_data['standort']])
+            CSVHandler.add_record([record_data['bezeichnung'], record_data['typ'], record_data['hersteller'], record_data['anschaffungsdatum'], record_data['anschaffungspreis'], record_data['abteilung'], record_data['standort']])
             self.send_response(302)
             self.send_header('Location', '/')
             self.end_headers()

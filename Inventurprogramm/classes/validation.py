@@ -12,7 +12,7 @@ class Validation:
 
     @staticmethod
     def date_validation(to_validate_date)->bool:
-        date_characters=re.compile('^\d{2}\.\d{2}\.\d{4}$', re.IGNORECASE)
+        date_characters=re.compile('^\d{4}\-\d{2}\-\d{2}$', re.IGNORECASE)
         if date_characters.match(to_validate_date):
             return True
         else:
@@ -20,7 +20,7 @@ class Validation:
 
     @staticmethod
     def price_validation(to_validate_price)->bool:
-        price_characters=re.compile('^\d+(\.\d{1,2})$', re.IGNORECASE)
+        price_characters=re.compile('^\d+(\.\d{0,1,2})$', re.IGNORECASE)
         if price_characters.match(str(to_validate_price)):
             return True
         else:
