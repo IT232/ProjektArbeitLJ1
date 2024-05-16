@@ -1,6 +1,6 @@
 import csv
 import os
-import Validation
+from .Validation import Validation
 
 class CSVHandler:
 
@@ -12,29 +12,34 @@ class CSVHandler:
     def add_record(parameters):
         if len(parameters) != 7: 
             raise ValueError("Expected 7 parameters")
-        for atributes in parameters:
-            atributes=atributes.strip()
 
-        bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort = parameters
+        for i in range(len(parameters)):
+            if isinstance(parameters[i], str):
+                parameters[i] = parameters[i].strip()
 
-        for text in [bezeichnung, typ, hersteller, abteilung]:
-            text_validate_result = text_validation(text)
-        anschaffungsdatum_validate_result = date_validation(anschaffungsdatum)
-        anschaffungspreis_validate_result = price_validation(anschaffungspreis)
-        standort_validate_result = room_validation(standort)    
+        bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort = parameters 
 
-        if bezeichnung_validate_result == True \
-        and typ_validate_result == True \
-        and hersteller_validate_result == True \
-        and anschaffungsdatum_validate_result == True \
-        and anschaffungspreis_validate_result == True \
-        and text_validate_result == True \
-        and standort_validate_result == True:
+        validation_results = {
+            "bezeichnung": Validation.text_validation(bezeichnung),
+            "bezeichnung_unique": CSVHandler.find_record(bezeichnung),
+            "typ": Validation.text_validation(typ),
+            "hersteller": Validation.text_validation(hersteller),
+            "anschaffungsdatum": Validation.date_validation(anschaffungsdatum),
+            "anschaffungspreis": Validation.price_validation(anschaffungspreis),
+            "abteilung": Validation.text_validation(abteilung),
+            "standort": Validation.room_validation(standort)
+        }
+
+# Einkommentieren zum Debuggen 
+        for key, value in validation_results.items():
+            print(f"Validation result for {key}: {value}")
+
+        if all(validation_results.values()):
             with open(CSVHandler.FILENAME, 'a', newline='') as csvfile:
                 record_writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                record_writer.writerow([bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort])
+                record_writer.writerow(parameters)
         else:
-            return False        
+            return False     
 
 
 
@@ -61,4 +66,11 @@ class CSVHandler:
         os.remove(CSVHandler.FILENAME)        
         os.rename(CSVHandler.TEMPFILENAME, CSVHandler.FILENAME)
 
-    
+    @staticmethod
+    def find_record(bezeichnung):
+        with open(CSVHandler.FILENAME, 'r', newline='') as csvfile:
+            records_reader = csv.reader(csvfile, delimiter=';', quotechar='"')
+            for row in records_reader:
+                if row[0] == bezeichnung:
+                    return False
+        return True
