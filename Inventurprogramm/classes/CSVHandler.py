@@ -1,16 +1,42 @@
 import csv
 import os
+import Validation
 
 class CSVHandler:
 
     FILENAME = 'Inventurprogramm/data/database.csv'
     TEMPFILENAME = 'temp.csv'
 
+
     @staticmethod
-    def add_record(bezeichnung: str, typ: str, hersteller: str, anschaffungsdatum: str, anschaffungspreis: float, abteilung: str, standort: int):
-        with open(CSVHandler.FILENAME, 'a', newline='') as csvfile:
-            record_writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            record_writer.writerow([bezeichnung] + [typ] + [hersteller] + [anschaffungsdatum] + [anschaffungspreis] + [abteilung] + [standort])
+    def add_record(parameters):
+        if len(parameters) != 7: 
+            raise ValueError("Expected 7 parameters")
+        for atributes in parameters:
+            atributes=atributes.strip()
+
+        bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort = parameters
+
+        for text in [bezeichnung, typ, hersteller, abteilung]:
+            text_validate_result = text_validation(text)
+        anschaffungsdatum_validate_result = date_validation(anschaffungsdatum)
+        anschaffungspreis_validate_result = price_validation(anschaffungspreis)
+        standort_validate_result = room_validation(standort)    
+
+        if bezeichnung_validate_result == True \
+        and typ_validate_result == True \
+        and hersteller_validate_result == True \
+        and anschaffungsdatum_validate_result == True \
+        and anschaffungspreis_validate_result == True \
+        and text_validate_result == True \
+        and standort_validate_result == True:
+            with open(CSVHandler.FILENAME, 'a', newline='') as csvfile:
+                record_writer = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                record_writer.writerow([bezeichnung, typ, hersteller, anschaffungsdatum, anschaffungspreis, abteilung, standort])
+        else:
+            return False        
+
+
 
     @staticmethod
     def read_all_records():
@@ -20,6 +46,7 @@ class CSVHandler:
             for row in records_reader:
                 data_records.append(row)
         return data_records      
+
 
     @staticmethod 
     def delete_record(bezeichnung: str):
