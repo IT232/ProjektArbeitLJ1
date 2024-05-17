@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>neuer Eintrag</title>
+    <style>
+        .website{
+            background-color: #273443;
+            height: max-content;
+            position: relative;
+            width: 90%;
+            margin-right: 5%;
+            margin-left: 5%;
+            padding-top: 0.6em;
+            padding-bottom: 0.6em;
+        }
+        body{
+            background-color: #6B7280;
+            color: #ffffff;
+        }
+        caption{
+            color: black;
+            font-size: 26px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="website">
+    <form id=data action="/save_new_record" method="post">
+        <p><label>Bezeichnung (Muss einzigartig sein): </label>
+            <input required="required" id="bezeichnung" name="bezeichnung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+        <p><label>Typ: </label>
+            <input required="required" id="typ" name="typ" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+        <p><label>Hersteller: </label>
+            <input required="required" id="hersteller" name="hersteller" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+        <p><label>Anschaffungsdatum: </label>
+            <input type=date required="required" id="anschaffungsdatum" name="anschaffungsdatum" placeholder="tt.mm.jjjj" pattern="^\d{2}\.\d{2}\.\d{4}$"></p>
+        <p><label>Anschaffungspreis: </label>
+            <input required="required" id="anschaffungspreis" name="anschaffungspreis" placeholder="0.00" pattern="^\d+(\.\d{0,1,2})$">€</p>
+        <p><label>Abteilung: </label>
+            <input required="required" id="abteilung" name="abteilung" pattern="^[A-Za-z0-9äüöß\-()&#.: ]+$"></p>
+        <p><label>Standort: </label>
+            <input required="required" id="standort" name="standort" pattern="\d+$"></p>
+        <button type="submit">Speichern</button>
+    </form>
+    <br>
+    <form action="/" method="get">
+        <button type="back">Zurück</button>
+    </form>
+</div>
+
+</body>
+</html>
