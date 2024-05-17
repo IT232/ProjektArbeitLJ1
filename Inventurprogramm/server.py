@@ -37,7 +37,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            self.wfile.write(b'<html><body><h1>404 Not Found</h1><p>Die Seite, die sie aufrufen wollten existiert nicht.</p></body></html>')   
+            self.wfile.write(b'<html><body><h1>404 Not Found</h1><p>Die Seite, die Sie aufrufen wollten, existiert nicht.</p></body></html>')   
 
 
     def do_POST(self):
@@ -53,13 +53,13 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            self.wfile.write(b'<html><body><h1>404 Not Found</h1><p>Die Seite, die sie aufrufen wollten existiert nicht.</p></body></html>')   
+            self.wfile.write(b'<html><body><h1>404 Not Found</h1><p>Die Seite, die Sie aufrufen wollten, existiert nicht.</p></body></html>')   
 
 
 if __name__ == '__main__':
     webServer = HTTPServer((hostName, serverPort), MyServer)
     print("Unsere GUI ist eine Website!")
-    print('Server gestartet http://%s:%s' % (hostName, serverPort))
+    print('Server gestartet | http://%s:%s' % (hostName, serverPort))
 
     try:
         webServer.serve_forever()
@@ -67,4 +67,4 @@ if __name__ == '__main__':
         pass
 
     webServer.server_close()
-    print('Server stopped.')
+    print('Server gestoppt.')
